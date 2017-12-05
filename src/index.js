@@ -11,7 +11,6 @@ import thunk from 'redux-thunk';
 
 import reducer from "./reducers";
 
-// import App from './components/App';
 import Error from "./components/Error";
 import Home from "./components/Home";
 import User from "./components/User";
@@ -19,7 +18,6 @@ import Login from "./components/Login";
 
 import './index.css';
 
-// const createStoreWithMiddleware = applyMiddleware(thunk);
 
 const store = createStore(
     combineReducers({

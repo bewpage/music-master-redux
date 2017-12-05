@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+
+
 import { browserHistory } from 'react-router'
 
 // import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 import axios from 'axios';
-import { setTokens } from "../actions";
+import { setTokens, refreshToken } from "../actions";
 
 
 class User extends Component {
@@ -14,8 +16,9 @@ class User extends Component {
     componentDidMount() {
         // params injected via react-router, dispatch injected via connect
         const {dispatch, params} = this.props;
-        console.log('this.props', this.props);
-        console.log('params', params);
+        // console.log('this.props', this.props);
+        // console.log('params', params);
+        // console.log('dispatch', dispatch);
         const {access_token, refresh_token} = params;
         dispatch(setTokens({access_token, refresh_token}));
         // dispatch(getMyInfo());
@@ -25,7 +28,8 @@ class User extends Component {
     //redux should take that params to state
 
     refreshToken(){
-        const refresh_token = this.state.refresh_token;
+        const { dispatch } = this.props;
+        const refresh_token = this.props.refresh_token;
         // console.log('refresh token', refresh_token);
         let data = {
             params: {
@@ -36,14 +40,13 @@ class User extends Component {
         axios.get(REFRESH_TOKEN_URL, data)
             .then((response) => {
                 let { access_token } = response.data;
-                this.setState({
-                    access_token
-                });
-                console.log('new access token', access_token);
+                const new_access_token = access_token;
+                console.log('new access token', new_access_token);
+                return dispatch(refreshToken({new_access_token}));
             })
             .catch((e) => {
                 console.log(e);
-            })
+            });
     }
 
     logOff(event){
@@ -83,7 +86,7 @@ class User extends Component {
 // export default connect(state => state)(User);
 
 function mapStateToProps(state){
-    const { access_token, refresh_token } = state.reducer;
+    const { access_token, refresh_token } = state.reducer.tokens;
     console.log('state tutaj', state);
     return {
         access_token,
