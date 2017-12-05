@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router'
+
+// import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+
 import axios from 'axios';
-import { browserHistory } from 'react-router';
+import { setTokens } from "../actions";
 
 
 class User extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            refresh_token: this.props.params.refresh_token,
-            access_token: this.props.params.access_token
-        }
+
+
+    componentDidMount() {
+        // params injected via react-router, dispatch injected via connect
+        const {dispatch, params} = this.props;
+        console.log('this.props', this.props);
+        console.log('params', params);
+        const {access_token, refresh_token} = params;
+        dispatch(setTokens({access_token, refresh_token}));
+        // dispatch(getMyInfo());
+        console.log('this', this);
     }
 
     //redux should take that params to state
@@ -39,7 +49,7 @@ class User extends Component {
     logOff(event){
         event.preventDefault();
         browserHistory.push('/');
-        console.log('logging off user')
+        console.log('logging off user', browserHistory)
     }
 
     render() {
@@ -49,9 +59,9 @@ class User extends Component {
                     <h1>User</h1>
                     <div className="">
                         <h3>Access Token:</h3>
-                        <p>{this.state.access_token}</p>
+                        <p>{this.props.access_token}</p>
                         <h3>Refresh Token:</h3>
-                        <p>{this.props.params.refresh_token}</p>
+                        <p>{this.props.refresh_token}</p>
                         <button
                             onClick={() => this.refreshToken()}
                         >
@@ -69,4 +79,20 @@ class User extends Component {
     }
 }
 
-export default User;
+
+// export default connect(state => state)(User);
+
+function mapStateToProps(state){
+    const { access_token, refresh_token } = state.reducer;
+    console.log('state tutaj', state);
+    return {
+        access_token,
+        refresh_token
+    }
+}
+
+export default connect(mapStateToProps, null)(User);
+
+
+
+
