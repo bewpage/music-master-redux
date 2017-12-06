@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
-
-
-import { browserHistory } from 'react-router'
-
-// import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import { browserHistory, Link } from 'react-router'
 import axios from 'axios';
-import { setTokens, refreshToken } from "../actions";
+import { setTokens, refreshToken } from "../actions/action_tokens";
+import { fetchUser } from "../actions/action_user";
+import {fetchPlaylistsMenu} from "../actions/action_playlist";
 
 
 class User extends Component {
 
 
+
     componentDidMount() {
-        // params injected via react-router, dispatch injected via connect
-        const {dispatch, params} = this.props;
-        // console.log('this.props', this.props);
-        // console.log('params', params);
-        // console.log('dispatch', dispatch);
+        console.log('this', this);
+        const {params, user} = this.props;
         const {access_token, refresh_token} = params;
-        dispatch(setTokens({access_token, refresh_token}));
-        // dispatch(getMyInfo());
+        const { id } = user;
+        this.props.setTokens({access_token, refresh_token});
+        this.props.fetchUser(access_token);
+        this.props.fetchPlaylistsMenu(id, access_token);
         console.log('this', this);
     }
 
-    //redux should take that params to state
-
     refreshToken(){
-        const { dispatch } = this.props;
-        const refresh_token = this.props.refresh_token;
+        const refresh_token = this.props.tokens.refresh_token;
         // console.log('refresh token', refresh_token);
         let data = {
             params: {
@@ -41,8 +36,8 @@ class User extends Component {
             .then((response) => {
                 let { access_token } = response.data;
                 const new_access_token = access_token;
-                console.log('new access token', new_access_token);
-                return dispatch(refreshToken({new_access_token}));
+                // console.log('new access token', new_access_token);
+                return this.props.refreshToken({new_access_token});
             })
             .catch((e) => {
                 console.log(e);
@@ -59,12 +54,12 @@ class User extends Component {
         return (
             <div>
                 <div className="">
-                    <h1>User</h1>
+                    <h1>User: {this.props.user.id}</h1>
                     <div className="">
                         <h3>Access Token:</h3>
-                        <p>{this.props.access_token}</p>
+                        <p>{this.props.tokens.access_token}</p>
                         <h3>Refresh Token:</h3>
-                        <p>{this.props.refresh_token}</p>
+                        <p>{this.props.tokens.refresh_token}</p>
                         <button
                             onClick={() => this.refreshToken()}
                         >
@@ -75,6 +70,21 @@ class User extends Component {
                         >
                             Log Off
                         </button>
+                    </div>
+                    <div>
+                        <a onClick={() => browserHistory.push('/search')}
+                        >SEARCH</a>
+                    </div>
+                    <div>
+                        <p>My Playlists:</p>
+                        <ul>
+                            {this.props.playlists.playlists.map((playlist, i) => {
+                                return (
+
+                                        <li key={i}>{playlist.name}</li>
+                                )
+                            })}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -87,14 +97,42 @@ class User extends Component {
 
 function mapStateToProps(state){
     const { access_token, refresh_token } = state.reducer.tokens;
+    const { id } = state.reducer.userReducer.user;
+    const {playlistMenu, playlists } = state.reducer.playlistReducer;
     console.log('state tutaj', state);
+    console.log('state id', id);
     return {
-        access_token,
-        refresh_token
+        tokens: {
+            access_token,
+            refresh_token,
+        },
+        user: {
+            id
+        },
+        playlists: {
+            playlistMenu,
+            playlists
+        }
     }
 }
 
-export default connect(mapStateToProps, null)(User);
+
+
+// export default connect(mapStateToProps, null)(User);
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        setTokens,
+        refreshToken,
+        fetchUser,
+        fetchPlaylistsMenu
+    }, dispatch)
+};
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(User);
 
 
 
