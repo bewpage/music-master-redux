@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { browserHistory, Link } from 'react-router'
+// import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { setTokens, refreshToken } from "../actions/action_tokens";
 import { fetchUser } from "../actions/action_user";
 import {fetchPlaylistsMenu} from "../actions/action_playlist";
 
 
+
+
 class User extends Component {
 
-
-
     componentDidMount() {
-        console.log('this', this);
-        const {params, user} = this.props;
+        // console.log('this in user', this);
+        const { params } = this.props.match;
+        const { user } = this.props;
+        // console.log('params', params);
+        // console.log('user', user);
         const {access_token, refresh_token} = params;
         const { id } = user;
         this.props.setTokens({access_token, refresh_token});
         this.props.fetchUser(access_token);
         this.props.fetchPlaylistsMenu(id, access_token);
-        console.log('this', this);
+        // console.log('this', this);
     }
 
     refreshToken(){
@@ -46,8 +49,8 @@ class User extends Component {
 
     logOff(event){
         event.preventDefault();
-        browserHistory.push('/');
-        console.log('logging off user', browserHistory)
+        // browserHistory.push('/./.');
+        // console.log('logging off user', browserHistory)
     }
 
     render() {
@@ -72,12 +75,13 @@ class User extends Component {
                         </button>
                     </div>
                     <div>
-                        <a onClick={() => browserHistory.push('/search')}
-                        >SEARCH</a>
+                        {/*<Link onClick={() => browserHistory.push('/search')}*/}
+                        {/*>SEARCH</Link>*/}
                     </div>
                     <div>
                         <p>My Playlists:</p>
                         <ul>
+                            {/*add here logic if playlist is undefined*/}
                             {this.props.playlists.playlists.map((playlist, i) => {
                                 return (
 

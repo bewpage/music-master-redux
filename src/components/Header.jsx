@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-
+import './Header.css';
+import TrackSearch from "./TrackSearch";
 
 
 class Header extends Component {
     render() {
         return (
-            <div>
-                <div className="spotify-login">
-                    <h1>Spotify App</h1>
-                    <p>This is Header</p>
+            <div className='header container borderBox'>
+                <div className='row'>
+                    <TrackSearch />
                 </div>
             </div>
         );

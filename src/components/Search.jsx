@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {FormGroup, FormControl, InputGroup, Glyphicon} from 'react-bootstrap';
 import {setTokens} from "../actions/action_tokens";
-import {browserHistory} from "react-router";
+import { Link } from "react-router-dom";
 
 
 class Search extends Component{
@@ -58,7 +58,7 @@ class Search extends Component{
                     </InputGroup>
                 </FormGroup>
                 <div>
-                    <a onClick={()=>browserHistory.push('/')}>Log Out</a>
+                    {/*<a onClick={()=>push('/')}>Log Out</a>*/}
                 </div>
                 <div>
 

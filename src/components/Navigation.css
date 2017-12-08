@@ -1,0 +1,86 @@
+.navBar{
+    padding: 24px 0;
+    padding-bottom: 95px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    user-select: none;
+    cursor: default;
+}
+
+.navBar-expand{
+    flex: 1;
+}
+
+.navBar-expand ul{
+    list-style: none;
+    padding-left: 5px;
+}
+
+.navBar-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.navBar-header_logo{
+    height: 32px;
+    width: 32px;
+    border-radius: 15px;
+    background: #F0F8FF;
+}
+
+.navBar-group{
+    border-top: 1px solid hsla(0,0%,100%,.25);
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+.navBar-item{
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: .015em;
+    font-weight: 600;
+    padding: 3px 0;
+}
+
+.navBar-item__with-icon{
+    padding-right: 30px;
+    position: relative;
+}
+
+.navBar-link{
+    display: inline-block;
+    border: 0;
+    width: 100%;
+}
+
+.navBar-link__active{
+    color: #1db954;
+}
+
+.link-subtle{
+    transition-property: color;
+    transition-duration: .2s;
+    transition-timing-function: linear;
+    color: hsla(0,0%,100%,.6);
+}
+
+.ellipsis-one-line{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search-icon{
+    /*display: inline-block;*/
+}
+
+.navBar-item .search-icon{
+    position: absolute;
+    right: 0;
+    top: 5px;
+    height: 30px;
+    width: 30px;
+}

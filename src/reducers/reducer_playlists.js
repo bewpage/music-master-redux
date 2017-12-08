@@ -1,6 +1,14 @@
 import { FETCH_PLAYLIST_MENU_PENDING, FETCH_PLAYLIST_MENU_SUCCESS, FETCH_PLAYLIST_MENU_ERROR } from "../constants";
 
-const playlistReducer = (state = {}, action) => {
+const stateInitial = {
+    playlists: {
+        playlistMenu: {},
+        playlists: {}
+    }
+};
+
+
+const playlistReducer = (state = stateInitial, action) => {
   switch(action.type){
       case 'FETCH_PLAYLIST_MENU_PENDING':
           return {
@@ -11,8 +19,8 @@ const playlistReducer = (state = {}, action) => {
           const { playlists } = action;
           return {
               ...state,
-              playlistMenu: action.playlists,
               playlists,
+              playlistMenu: action.playlists,
               fetchPlaylistError: false,
               fetchPlaylistPending: false
           };

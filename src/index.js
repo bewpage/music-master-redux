@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-
 import { createStore,  combineReducers, applyMiddleware  } from 'redux';
 import { Provider } from 'react-redux';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+
+import { Route, Switch, matchPath } from 'react-router';
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
 
 import thunk from 'redux-thunk';
 import reducer from "./reducers";
@@ -22,6 +23,10 @@ import './index.css';
 import { loadState, saveState } from './localStorage';
 import throttle from 'lodash/throttle';
 
+
+const history = createHistory();
+const middleware = routerMiddleware(history)
+
 const presistedState = loadState();
 const reducers = combineReducers({
     reducer,
@@ -31,7 +36,7 @@ const reducers = combineReducers({
 const store = createStore(
     reducers,
     presistedState,
-    applyMiddleware(thunk)
+    applyMiddleware(thunk, middleware)
 );
 
 
@@ -43,18 +48,24 @@ store.subscribe(throttle(() => {
 }, 1000));
 
 
-const history = syncHistoryWithStore(browserHistory, store);
 
+// const history = syncHistoryWithStore(browserHistory, store);
+
+// console.log('history', browserHistory);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history}>
-            <Route path='/' component={App}>
-                <IndexRoute component={Login} />
-                <Route path='/user/:access_token/:refresh_token' component={User} />
-                <Route path='/search' component={Search} />
-                <Route path='/error/:errorMsg' component={Error}/>
-            </Route>
-        </Router>
+        <ConnectedRouter  history={history}>
+            <div>
+                <Switch>
+                    <Route exact={true} path='/' component={Login} />
+                    <Route path='/' component={App} />
+                    {/*<Route exact={true} path='/user/' component={User}/>*/}
+                        {/*<Route path='/user/:access_token/:refresh_token' component={User} />*/}
+                    {/*<Route path='/search' component={Search} />*/}
+                    {/*<Route path='/error/:errorMsg' component={Error}/>*/}
+                </Switch>
+            </div>
+        </ConnectedRouter >
     </Provider>
     , document.getElementById('root'));
