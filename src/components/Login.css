@@ -1,0 +1,27 @@
+.login{
+    height: 100%;
+    margin: 20vw 5vw;
+}
+
+
+.login-item{
+    height: 40px;
+    margin: 10px;
+}
+
+.link{
+    color: #1ED760;
+    transition: all .2s ease-in;
+}
+
+.link:hover{
+    color: #ffffff;
+}
+
+
+.login-title{
+    line-height: 40px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 32px;
+}

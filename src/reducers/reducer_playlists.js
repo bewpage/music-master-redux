@@ -12,8 +12,8 @@ const playlistReducer = (state = stateInitial, action) => {
   switch(action.type){
       case 'FETCH_PLAYLIST_MENU_PENDING':
           return {
-              fetchPlaylistPending: true,
-              ...state
+              ...state,
+              fetchPlaylistPending: true
           };
       case 'FETCH_PLAYLIST_MENU_SUCCESS':
           const { playlists } = action;

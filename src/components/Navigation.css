@@ -23,13 +23,23 @@
     justify-content: space-between;
     padding-bottom: 10px;
 }
-
 .navBar-header_logo{
-    height: 32px;
-    width: 32px;
-    border-radius: 15px;
-    background: #F0F8FF;
+    height: 40px;
+    width: 40px;
+    /*color: #1ED760;*/
 }
+
+.fa-spotify{
+    /*color: #1ED760;*/
+}
+
+/*.link{*/
+    /*transition: all .1s ease-in;*/
+/*}*/
+
+/*.link:hover{*/
+    /*color: #ffffff;*/
+/*}*/
 
 .navBar-group{
     border-top: 1px solid hsla(0,0%,100%,.25);

@@ -60,10 +60,8 @@ ReactDOM.render(
                 <Switch>
                     <Route exact={true} path='/' component={Login} />
                     <Route path='/' component={App} />
-                    {/*<Route exact={true} path='/user/' component={User}/>*/}
-                        {/*<Route path='/user/:access_token/:refresh_token' component={User} />*/}
-                    {/*<Route path='/search' component={Search} />*/}
-                    {/*<Route path='/error/:errorMsg' component={Error}/>*/}
+                    <Route path='/search' component={Search} />
+                    <Route path='/error/:errorMsg' component={Error}/>
                 </Switch>
             </div>
         </ConnectedRouter >

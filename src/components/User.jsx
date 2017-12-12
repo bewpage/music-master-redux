@@ -7,6 +7,7 @@ import { setTokens, refreshToken } from "../actions/action_tokens";
 import { fetchUser } from "../actions/action_user";
 import {fetchPlaylistsMenu} from "../actions/action_playlist";
 
+import Playlists from './Playlists'
 
 
 
@@ -23,7 +24,7 @@ class User extends Component {
         this.props.setTokens({access_token, refresh_token});
         this.props.fetchUser(access_token);
         this.props.fetchPlaylistsMenu(id, access_token);
-        // console.log('this', this);
+        console.log('this', this);
     }
 
     refreshToken(){
@@ -82,12 +83,11 @@ class User extends Component {
                         <p>My Playlists:</p>
                         <ul>
                             {/*add here logic if playlist is undefined*/}
-                            {this.props.playlists.playlists.map((playlist, i) => {
-                                return (
+                            <Playlists
+                                playlists={this.props.playlists}
+                                fetchPlaylistPending={this.props.fetchPlaylistPending}
 
-                                        <li key={i}>{playlist.name}</li>
-                                )
-                            })}
+                            />
                         </ul>
                     </div>
                 </div>
@@ -100,22 +100,29 @@ class User extends Component {
 // export default connect(state => state)(User);
 
 function mapStateToProps(state){
-    const { access_token, refresh_token } = state.reducer.tokens;
+    const {
+        access_token,
+        refresh_token
+    } = state.reducer.tokens;
     const { id } = state.reducer.userReducer.user;
-    const {playlistMenu, playlists } = state.reducer.playlistReducer;
-    console.log('state tutaj', state);
-    console.log('state id', id);
+    const {
+        playlistMenu,
+        playlists,
+        fetchPlaylistPending
+    } = state.reducer.playlistReducer;
+    // console.log('state tutaj', state);
     return {
         tokens: {
             access_token,
-            refresh_token,
+            refresh_token
         },
         user: {
             id
         },
         playlists: {
             playlistMenu,
-            playlists
+            playlists,
+            fetchPlaylistPending
         }
     }
 }

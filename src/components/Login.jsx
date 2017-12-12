@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setTokens, refreshToken } from "../actions/action_tokens";
 import { fetchUser } from "../actions/action_user";
+import './Login.css';
 
-import { Link } from 'react-router-dom';
 
 class Login extends Component {
     constructor(props){
@@ -34,15 +34,34 @@ class Login extends Component {
 
 
     render() {
-
         return (
-            <div className="login">
-                <h2>Here's our login page!</h2>
-                <button onClick={() => this.loginTest()}
-                >
-                    LogIn
-                </button>
-                <a href={'http://localhost:3000/login'}>spotify login</a>
+            <div className="login container">
+                <div className='row'>
+                    <div className='link'>
+                        <i class="fab fa-spotify fa-10x"></i>
+                    </div>
+
+                </div>
+                <div className='login-row'>
+                    <div className='login-item'>
+                        <h2 className='login-title'
+                        >
+                            Here's our login page!
+                        </h2>
+                    </div>
+                </div>
+                {/*<button onClick={() => this.loginTest()}*/}
+                {/*>*/}
+                    {/*LogIn*/}
+                {/*</button>*/}
+                <div className='login-row'>
+                    <div className='login-item'>
+                        <button className='btn btn-primary'>
+                            <a href={'http://localhost:3000/login'}>spotify login</a>
+                        </button>
+
+                    </div>
+                </div>
             </div>
         );
     }

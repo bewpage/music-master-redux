@@ -3,7 +3,6 @@ import {
     FETCH_PLAYLIST_MENU_SUCCESS,
     FETCH_PLAYLIST_MENU_ERROR
 } from "../constants";
-// const queryString = require('query-string');
 import querystring from 'query-string';
 
 export const fetchPlaylistMenuPending = () => {

@@ -6,11 +6,11 @@ import TrackSearch from "./TrackSearch";
 class Header extends Component {
     render() {
         return (
-            <div className='header container borderBox'>
+            <header className='user-header container borderBox'>
                 <div className='row'>
-                    <TrackSearch />
+
                 </div>
-            </div>
+            </header>
         );
     }
 }

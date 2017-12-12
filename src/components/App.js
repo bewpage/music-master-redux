@@ -4,6 +4,7 @@ import Header from './Header';
 import Navigation from "./Navigation";
 import './App.css';
 import User from "./User";
+import Search from "./Search";
 
 
 
@@ -14,14 +15,15 @@ class App extends Component {
         console.log('children', this.props);
         return (
             <div className='App'>
-                <div className='app-container borderBox'>
-                    <div className='nav-bar-container borderBox'>
+                <div className='app container'>
+                    <div className='nav-bar'>
                         <Navigation />
                     </div>
-                    <div className='main-section container borderBox'>
+                    <div className='main-container borderBox'>
                         <Header />
-                        <div className='main-section-container container'>
+                        <div className='main-section borderBox'>
                             <Route path='/user/:access_token/:refresh_token' component={User} />
+                            <Route path='/search' component={Search} />
                         </div>
                     </div>
                 </div>
