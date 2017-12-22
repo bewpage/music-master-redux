@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { setTokens, refreshToken } from "../actions/action_tokens";
 import { fetchUser } from "../actions/action_user";
-import {fetchPlaylistsMenu} from "../actions/action_playlist";
+import {fetchPlaylistsMenu} from "../actions/action_playlists";
 
 import Playlists from './Playlists'
 
@@ -110,7 +110,7 @@ function mapStateToProps(state){
         playlists,
         fetchPlaylistPending
     } = state.reducer.playlistReducer;
-    // console.log('state tutaj', state);
+    console.log('state in User', state);
     return {
         tokens: {
             access_token,

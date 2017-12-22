@@ -35,12 +35,11 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="login container">
-                <div className='row'>
+            <div className="login container borderBox">
+                <div className='row login-logo'>
                     <div className='link'>
-                        <i class="fab fa-spotify fa-10x"></i>
+                        <i className="logo-image fab fa-spotify fa-10x"></i>
                     </div>
-
                 </div>
                 <div className='login-row'>
                     <div className='login-item'>

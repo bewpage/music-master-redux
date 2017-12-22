@@ -6,11 +6,11 @@ class Navigation extends Component{
 
     render(){
         return(
-            <div className='navBar'>
+            <div className='navBar borderBox'>
                 <div className='navBar-expand'>
                     <ul>
                         <div className='navBar-header'>
-                            <Link to={'/user'} className='navBar-header_logo link'><i class="fab fa-spotify fa-3x link-color"></i></Link>
+                            <Link to={'/user'} className='navBar-header_logo link'><i className="fab fa-spotify fa-3x link-color"></i></Link>
                         </div>
                         <div className='navBar-group'>
                             <li className='navBar-item navBar-item__with-icon'>
@@ -33,10 +33,10 @@ class Navigation extends Component{
                             </li>
                             <li className='navBar-item'>
                                 <Link
-                                    to="/user"
+                                    to="/music"
                                     className='link-subtle navBar-link ellipsis-one-line'
                                 >
-                                    User
+                                    Your Music
                                 </Link>
                             </li>
                         </div>

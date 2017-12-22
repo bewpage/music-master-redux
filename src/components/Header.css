@@ -1,3 +1,44 @@
 .user-header{
-    padding: 32px 80px;
+    height: 25em;
+    padding: 3em 2em;
+    margin-left: -8px;
+    margin-right: -8px;
+    max-width: 1480px;
 }
+
+.user-info{
+    position: relative;
+    height: 200px;
+    text-align: center;
+}
+
+.avatar{
+    border-radius: 50%;
+    border: 2px solid #282828;
+    background: #282828;
+}
+
+.user-info-avatar{
+
+}
+
+.user-avatar{
+    margin: 0 auto;
+    height: 200px;
+    width: 200px;
+}
+
+.avatar-icon{
+    height: 200px;
+}
+
+.user-name{
+    font-size: 36px;
+    line-height: 44px;
+    letter-spacing: -.005em;
+    font-weight: 600;
+    margin-top: 32px;
+
+}
+
+

@@ -25,7 +25,7 @@ import throttle from 'lodash/throttle';
 
 
 const history = createHistory();
-const middleware = routerMiddleware(history)
+const middleware = routerMiddleware(history);
 
 const presistedState = loadState();
 const reducers = combineReducers({

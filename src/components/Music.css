@@ -1,0 +1,80 @@
+/*.container-fluid{*/
+
+/*}*/
+
+.container-fluid-nospacearound{
+
+}
+
+/*.playlist-row{*/
+
+/*}*/
+
+.music__media-object__hoverable{
+    /*width: 90%;*/
+}
+
+.music__media-object{
+    /*padding-bottom: 2em;*/
+}
+
+.music__contextmenu-wrapper{
+
+}
+
+/*@media (min-width: 576px){*/
+    /*.music__contextmenu-wrapper{*/
+        /*height: 200px;*/
+        /*width: 200px;*/
+    /*}*/
+/*}*/
+
+/*@media (min-width: 768px){*/
+    /*.music__contextmenu-wrapper{*/
+        /*height: 150px;*/
+        /*width: 150px;*/
+        /*margin-left: -5px;*/
+    /*}*/
+/*}*/
+
+/*@media (min-width: 992px){*/
+    /*.music__contextmenu-wrapper{*/
+        /*height: 140px;*/
+        /*width: 140px;*/
+        /*margin-left: -5px;*/
+    /*}*/
+/*}*/
+
+
+.cover-art{
+
+}
+
+.cover-art .icon{
+
+}
+
+.cover-art__image{
+
+}
+
+.test {
+
+}
+
+.cover-art__image img{
+
+}
+
+/*.cover-art .cover-art__image{*/
+    /*transition-property: opacity;*/
+    /*transition-duration: .3s;*/
+    /*transition-timing-function: cubic-bezier(.3,0,.4,1);*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*background-size: cover!important;*/
+    /*background-position: 50%;*/
+    /*opacity: 0;*/
+/*}*/

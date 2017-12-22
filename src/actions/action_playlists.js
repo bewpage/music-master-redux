@@ -40,8 +40,6 @@ export const fetchPlaylistsMenu = (userId, accessToken) => {
     return dispatch => {
         const scope = 'user-read-private user-read-email playlist-modify-public';
         const request = new Request(`https://api.spotify.com/v1/users/${userId}/playlists?` + querystring.stringify({
-            offset: 5,
-            limit: 5,
             scope
         }), {
             headers: new Headers({
