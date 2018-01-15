@@ -1,7 +1,10 @@
 import {
     FETCH_PLAYLIST_MENU_PENDING,
     FETCH_PLAYLIST_MENU_SUCCESS,
-    FETCH_PLAYLIST_MENU_ERROR
+    FETCH_PLAYLIST_MENU_ERROR,
+    FETCH_PLAYLIST_SONG_PENDING,
+    FETCH_PLAYLIST_SONG_SUCCESS,
+    FETCH_PLAYLIST_SONG_ERROR
 } from "../constants";
 import querystring from 'query-string';
 
@@ -65,3 +68,46 @@ export const fetchPlaylistsMenu = (userId, accessToken) => {
     };
 };
 
+export const fetchPlaylistSongsPending = () => {
+  return {
+      type: 'FETCH_PLAYLIST_SONG_PENDING'
+  }
+};
+
+export const fetchPlaylistSongsSuccess = (songs) => {
+  return {
+      type: 'FETCH_PLAYLIST_SONG_SUCCESS',
+      songs
+  }
+};
+
+export const fetchPlaylistSongsError = () => {
+  return {
+      type: 'FETCH_PLAYLIST_SONG_ERROR'
+  }
+};
+
+export const fetchPlaylistSongs = (userId, playlistId, accessToken) => {
+  return dispatch => {
+      const request = new Request(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+          headers: new Headers({
+              'Authorization': 'Bearer ' + accessToken
+          })
+      });
+
+      dispatch(fetchPlaylistSongsPending());
+
+      fetch(request)
+          .then(res => {
+              return res.json();
+          })
+          .then(res => {
+              console.log('songs', res.items);
+              dispatch(fetchPlaylistSongsSuccess(res.items))
+          })
+          .catch(e => {
+              dispatch(fetchPlaylistSongsError(e));
+          })
+  }
+
+};

@@ -8,10 +8,10 @@ class Playlistst extends Component{
     render(){
         const fetchPlaylistPending = this.props.playlists.fetchPlaylistPending;
         const { playlists } = this.props.playlists;
-        console.log('playlists ', playlists);
-        console.log('fetch pending ', fetchPlaylistPending);
+        // console.log('playlists ', playlists);
+        // console.log('fetch pending ', fetchPlaylistPending);
         if(fetchPlaylistPending === true){
-            console.log('still pending ...');
+            // console.log('still pending ...');
             return (
                 <div>Still pending ...</div>
             )
@@ -27,3 +27,18 @@ class Playlistst extends Component{
 }
 
 export default Playlistst;
+
+
+// render() {
+//     let myComponent;
+//     if(check if props has val) {
+//         myComponent = <MyComponent />
+//     } else {
+//         myComponent = null
+//     }
+//     return (
+//         <div>
+//             {myComponent}
+//         </div>
+//     )
+// }

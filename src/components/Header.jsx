@@ -8,7 +8,7 @@ class Header extends Component {
 
     componentDidMount(){
         const { id } = this.props.reducer.userReducer.user;
-        console.log('id in headers', id)
+        // console.log('id in headers', id)
     }
 
     render() {

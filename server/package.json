@@ -1,0 +1,22 @@
+{
+  "name": "music-master-new",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2",
+    "querystring": "~0.2.0",
+    "request": "~2.34.0"
+  },
+  "devDependencies": {
+    "socket.io": "^2.0.3"
+  }
+}

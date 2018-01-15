@@ -14,17 +14,15 @@ import Playlists from './Playlists'
 class User extends Component {
 
     componentDidMount() {
-        // console.log('this in user', this);
         const { params } = this.props.match;
         const { user } = this.props;
-        // console.log('params', params);
         // console.log('user', user);
         const {access_token, refresh_token} = params;
         const { id } = user;
         this.props.setTokens({access_token, refresh_token});
         this.props.fetchUser(access_token);
         this.props.fetchPlaylistsMenu(id, access_token);
-        console.log('this', this);
+        // console.log('this', this);
     }
 
     refreshToken(){
@@ -86,7 +84,6 @@ class User extends Component {
                             <Playlists
                                 playlists={this.props.playlists}
                                 fetchPlaylistPending={this.props.fetchPlaylistPending}
-
                             />
                         </ul>
                     </div>
@@ -108,9 +105,10 @@ function mapStateToProps(state){
     const {
         playlistMenu,
         playlists,
-        fetchPlaylistPending
+        fetchPlaylistPending,
+        fetchPlaylistSongs
     } = state.reducer.playlistReducer;
-    console.log('state in User', state);
+    // console.log('state in User', state);
     return {
         tokens: {
             access_token,
@@ -121,8 +119,7 @@ function mapStateToProps(state){
         },
         playlists: {
             playlistMenu,
-            playlists,
-            fetchPlaylistPending
+            playlists
         }
     }
 }
@@ -136,7 +133,7 @@ const mapDispatchToProps = (dispatch) => {
         setTokens,
         refreshToken,
         fetchUser,
-        fetchPlaylistsMenu
+        fetchPlaylistsMenu,
     }, dispatch)
 };
 

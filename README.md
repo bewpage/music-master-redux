@@ -2,8 +2,9 @@
 
 This project is still in dev phase ...
 
+
 ### Try it out
-soon
+soon...
 
 ## Stack 
 #### Backend
@@ -18,6 +19,8 @@ soon
 > **MomentJS**  
 > **React-Bootstrap**  
 
-### I extended this application with:
 
-### next things to do:
+### some screen shots:
+![alt tag](screens/Untitled-1.png ) 
+
+![alt tag](screens/Untitled-2.png )

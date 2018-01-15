@@ -7,8 +7,10 @@ import {
 
 
 const stateInitial = {
-    songPlaying: false,
-    songPaused: true
+    songPlayer: {
+        songPlaying: false,
+        songPaused: true
+    }
 };
 
 const songsReducer = (state = stateInitial, action) => {
