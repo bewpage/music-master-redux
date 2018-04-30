@@ -11,11 +11,8 @@ const stateInitial = {
     fetchPlaylistPending: true,
     fetchPlaylistSongsPending: true,
     playlistMenu: {},
-    playlists: {}
-    // playlists: {
-    //     playlistMenu: {},
-    //     playlists: {}
-    // }
+    playlists: {},
+    songs: {}
 };
 
 
@@ -41,19 +38,20 @@ const playlistReducer = (state = stateInitial, action) => {
               fetchPlaylistError: true,
               fetchPlaylistPending: false
           };
-      case 'FETCH_PLAYLIST_SONGS_PENDING':
+      case 'FETCH_PLAYLIST_SONG_PENDING':
           return {
               ...state,
               fetchPlaylistPending: true
           };
-      case 'FETCH_PLAYLIST_SONGS_SUCCESS':
+      case 'FETCH_PLAYLIST_SONG_SUCCESS':
+          const { songs } = action;
           return {
               ...state,
-              songs: action.songs,
+              songs,
               fetchPlaylistSongsError: false,
               fetchPlaylistSongsPending: false
           };
-      case 'FETCH_PLAYLIST_SONGS_ERROR':
+      case 'FETCH_PLAYLIST_SONG_ERROR':
           return {
               ...state,
               fetchPlaylistSongsError: true,

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { setTokens, refreshToken } from "../actions/action_tokens";
 import { fetchUser } from "../actions/action_user";
-import {fetchPlaylistsMenu} from "../actions/action_playlists";
+import { fetchPlaylistsMenu } from "../actions/action_playlists";
 
 import Playlists from './Playlists'
 
@@ -82,8 +82,8 @@ class User extends Component {
                         <ul>
                             {/*add here logic if playlist is undefined*/}
                             <Playlists
-                                playlists={this.props.playlists}
-                                fetchPlaylistPending={this.props.fetchPlaylistPending}
+                                // playlists={this.props.playlists}
+                                // fetchPlaylistPending={this.props.fetchPlaylistPending}
                             />
                         </ul>
                     </div>
@@ -97,6 +97,7 @@ class User extends Component {
 // export default connect(state => state)(User);
 
 function mapStateToProps(state){
+    console.log('state in User', state);
     const {
         access_token,
         refresh_token
@@ -105,10 +106,7 @@ function mapStateToProps(state){
     const {
         playlistMenu,
         playlists,
-        fetchPlaylistPending,
-        fetchPlaylistSongs
     } = state.reducer.playlistReducer;
-    // console.log('state in User', state);
     return {
         tokens: {
             access_token,

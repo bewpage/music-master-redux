@@ -8,6 +8,7 @@ import User from "./User";
 import Search from "./Search";
 import Music from "./Music";
 import PlayingBar from "./PlayingBar";
+import Login from "./Login";
 
 import './App.css';
 
@@ -28,6 +29,7 @@ class App extends Component {
                     <Route path='/music' component={Music} />
                     <Route path='/user/:access_token/:refresh_token' component={User} />
                     <Route path='/search' component={Search} />
+                    <Route path='/login' component={Login} />
                 </div>
                 <div className='nowPlayingBar-container'>
                     <PlayingBar />

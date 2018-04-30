@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
-import { fetchPlaylistSongs } from "../actions/action_playlists";
+// import { fetchUser } from "../actions/action_user";
+// import { fetchPlaylistSongs } from "../actions/action_playlists";
 
 class PlayingBar extends Component{
 
     componentDidMount(){
-        console.log('props in playing bar', this.props)
-
+        // console.log('props in playing bar', this.props);
     }
 
 
     songPlay(){
-        console.log('this.props', this.props)
+        console.log('this.props', this.props);
 
     }
 
@@ -60,18 +60,14 @@ class PlayingBar extends Component{
     }
 }
 
-const mapStateToProps = (state) => {
-    console.log('state in playing bar', state.reducer);
-  return {
-      userId: state.userReducer ? state.reducer.userReducer.user : {},
-  };
-};
 
 const mapDispatchToProps = (dispatch) => {
-    console.log('dispatch playing bar', dispatch);
-    return bindActionCreators({
-        fetchPlaylistSongs
-    }, dispatch);
+    return dispatch
 };
+
+
+function mapStateToProps(state){
+    return {state}
+}
 
 export default connect(mapDispatchToProps, mapStateToProps)(PlayingBar);

@@ -18,11 +18,11 @@ import Login from "./components/Login";
 import Search from "./components/Search";
 import Error from "./components/Error";
 
-import './index.css';
 
 import { loadState, saveState } from './localStorage';
 import throttle from 'lodash/throttle';
 
+import './index.css';
 
 const history = createHistory();
 const middleware = routerMiddleware(history);

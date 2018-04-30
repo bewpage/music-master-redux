@@ -8,6 +8,10 @@ import {connect} from "react-redux";
 
 class Music extends Component {
 
+    componentDidMount(){
+        // console.log('props in Music', this.props.reducer);
+    }
+
     render() {
         // console.log('music props', this.props.reducer.tokens);
         const { access_token } = this.props.reducer.tokens;
@@ -24,7 +28,10 @@ class Music extends Component {
                     </div>
                 ) : (
                     <div className='container-fluid container-fluid--nospacearound'>
-                        <MusicPlaylistItem playlists={playlists} access_token={access_token}/>
+                        <MusicPlaylistItem
+                            // playlists={playlists}
+                            // access_token={access_token}
+                        />
                     </div>
                 )
                 }

@@ -1,36 +1,88 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from "redux";
+import { connect } from 'react-redux';
+import { fetchPlaylistSongs } from "../actions/action_playlists";
+import { playSong, stopSong, pauseSong, resumeSong } from "../actions/action_songs";
 import { isEmpty, hasIn } from 'lodash';
-import axios from 'axios';
+// import axios from 'axios';
 import './Music.css';
 
 
 class MusicPlaylistItem extends Component{
 
+    componentDidMount(){
+        console.log('props in MusicPlaylistItem', this.props);
+    }
+
+    componentWillReceiveProps(nextProps){
+        // console.log('nextProps.songPlaying', nextProps.songPlaying)
+    }
+
+    componentWillUpdate(){
+        // console.log('update', this.props);
+    }
+
+
+    calculateTime(){
+        const timeInterval = setInterval(() => {
+            if(this.state.timeElapsed === 30){
+                // console.log('hello');
+                clearInterval(this.state.timeElapsed);
+                this.props.stopSong();
+            }
+        }, 1000);
+        this.setState({
+            timeInterval
+        })
+    }
+
 
     songPlay(playlist){
-        console.log('co to jest', playlist.tracks.href);
-        // console.log('token', this.props.access_token)
-        const test = playlist.tracks.href;
-        fetch
+        const { userId } = this.props;
+        const playlistId = playlist.id;
+        const accessToken = this.props.access_token;
 
+        console.log('playlistId', playlistId);
+        // console.log('userId', userId);
+        // console.log('token', accessToken);
+        this.props.fetchPlaylistSongs(userId, playlistId, accessToken);
+        // let audio = new Audio(this.props.songs[0].track.href);
+        // let audio = new Audio(this.props.songs[0].track.preview_url);
+        // audio.play();
+        // I have to add logic for fetch data
+        // const songTest = this.props.songs[0].track.preview_url;
+        const songTest = this.props.songs[0].track;
+        console.log('song test song', songTest);
+        console.log('song test song.id', songTest.id);
+        this.props.playSong(songTest);
+        // console.log('songs list', this.props);
+        // this.props.songs.map((song, index) => {
+        //     // console.log('songs tracks', song.track);
+        //     // let audio = new Audio(song.track.preview_url);
+        //     // audio.play()
+        // });
     }
 
 
     render(){
+        console.log('this.props', this.props);
         return(
             <div className='_1V5hjg9Q-uySwVgMc32TQb row'>
                 {this.props.playlists.map((playlist, i) => {
+                    const showPlay = playlist.id === this.props.playlistId ? ' playing' : ' ';
                     // const { url } = playlist.images[0];
-                    // console.log('url', url);
+                    // console.log('playlistId in map function', playlist.id);
+                    // console.log('this.props.playlistId', this.props.playlistId);
                     // console.log('isEmpty url', isEmpty(playlist.images[0]));
                     // console.log('hasIn url', hasIn(playlist.images[0], 'url'));
                     let coverUrl = {
                         backgroundImage: hasIn(playlist.images[0], 'url') ? `url(${playlist.images[0].url})` : 'url(notProvided)',
                     };
+
                     return(
                         <div key={i} className='col-xs-6 col-sm-4 col-md-3 col-lg-2 col-xl-2'>
                             <div className='media-object' style={{maxWidth: '450px'}}>
-                                <div className='media-object-hoverable'>
+                                <div className={`media-object-hoverable${showPlay}`}>
                                     <div className='react-contextmenu-wrapper borderBox'>
                                         <a className='cover-art shadow actionable'
                                            aria-hidden="true"
@@ -45,7 +97,10 @@ class MusicPlaylistItem extends Component{
                                                 <div
                                                     className={`cover-art-image ${hasIn(playlist.images[0], 'url') ? 'cover-art-image-loaded' : ' '}`} style={coverUrl}></div>
                                             </div>
-                                            <button className='cover-art-playback' onClick={() => this.songPlay(playlist)}>
+                                            <button className='cover-art-playback'
+                                                    onClick={() => this.songPlay(playlist)}
+                                                    // onClick={() => {}}
+                                            >
                                                 <svg className='icon-play' viewBox={'0 0 85 100'}>
                                                     <path fill={'currentColor'} d={'M81 44.6c5 3 5 7.8 0 10.8L9 98.7c-5 3-9 .7-9-5V6.3c0-5.7 4-8 9-5l72 43.3z'}>
                                                         <title>PLAY</title>
@@ -84,4 +139,35 @@ class MusicPlaylistItem extends Component{
 
 
 
-export default MusicPlaylistItem;
+const mapStateToProps = (state) => {
+    const { playlists }  = state.reducer.playlistReducer;
+    const { access_token }  = state.reducer.tokens;
+    const userId  = state.reducer.userReducer.user.id;
+    const { songs } = state.reducer.playlistReducer;
+    console.log('state in MusicPlaylistItems', state.reducer);
+    // console.log('state songs', songs);
+    return {
+        playlists,
+        access_token,
+        userId,
+        songs,
+        songPlaying: state.reducer.songsReducer.songPlaying,
+        timeElapsed: state.reducer.songsReducer.timeElapsed,
+        songPaused: state.reducer.songsReducer.songPaused,
+        playlistId: state.reducer.playlistReducer.playlists ? state.reducer.playlistReducer.playlists.map(playlist => {return playlist.id}): ' ',
+    }
+};
+
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        fetchPlaylistSongs,
+        playSong,
+        stopSong,
+        pauseSong,
+        resumeSong
+    }, dispatch);
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MusicPlaylistItem);

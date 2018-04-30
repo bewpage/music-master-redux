@@ -27,18 +27,6 @@ export const fetchPlaylistMenuError = () => {
   }
 };
 
-
-// querystring.stringify({
-//     response_type: 'code',
-//     client_id: client_id,
-//     scope: scope,
-//     redirect_uri: redirect_uri,
-//     state: state
-// offset=2&limit=2"
-// }));
-
-// https://api.spotify.com/v1/users/{user_id}/playlists
-
 export const fetchPlaylistsMenu = (userId, accessToken) => {
     return dispatch => {
         const scope = 'user-read-private user-read-email playlist-modify-public';
@@ -99,10 +87,14 @@ export const fetchPlaylistSongs = (userId, playlistId, accessToken) => {
 
       fetch(request)
           .then(res => {
+              if(res.statusText === 'Unauthorized'){
+                  // console.log('token not valid');
+                  window.location.href = './login';
+              }
               return res.json();
           })
           .then(res => {
-              console.log('songs', res.items);
+              // console.log('songs', res.items);
               dispatch(fetchPlaylistSongsSuccess(res.items))
           })
           .catch(e => {

@@ -67,9 +67,9 @@ class Login extends Component {
 }
 
 function mapStateToProps(state){
+    console.log('state in Login', state);
     const { access_token, refresh_token } = state.reducer.tokens;
     const { id } = state.reducer.userReducer.user;
-    console.log('state in Login', state);
     return {
         tokens: {
             access_token,
